@@ -35,4 +35,13 @@ class Oystercard
     @status = "Not In Journey"
   end
 
+  def in_journey?
+    if @status == "In Journey"
+      return true
+    else
+      return false
+    end
+    
+  end
+
 end
