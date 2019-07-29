@@ -31,4 +31,8 @@ class Oystercard
     @status = "In Journey"
   end
 
+  def touch_out
+    @status = "Not In Journey"
+  end
+
 end

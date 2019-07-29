@@ -25,4 +25,9 @@ describe Oystercard do
     expect(subject.status).to eq("In Journey")
   end
 
+  it 'Checks that the card can be used to Touch_out' do
+    subject.touch_out
+    expect(subject.status).to eq("Not In Journey")
+  end
+
 end
