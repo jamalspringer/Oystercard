@@ -36,6 +36,7 @@ class Oystercard
   end
 
   def touch_out
+    @balance -= 1
     @status = "Not In Journey"
   end
 
