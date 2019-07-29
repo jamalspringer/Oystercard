@@ -20,4 +20,9 @@ describe Oystercard do
     expect(subject.balance).to eq(5)
   end
 
+  it 'Checks that the card can be used to Touch_in' do
+    subject.touch_in
+    expect(subject.status).to eq("In Journey")
+  end
+
 end
