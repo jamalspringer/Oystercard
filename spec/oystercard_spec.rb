@@ -13,4 +13,11 @@ describe Oystercard do
   it 'Checks that max balance is enforced' do
     expect{subject.top_up(100)}.to raise_error
   end
+
+  it 'Checks that a fare amount can be deducted from the balance on the card' do
+    subject.top_up(10)
+    subject.deduct(5)
+    expect(subject.balance).to eq(5)
+  end
+
 end
