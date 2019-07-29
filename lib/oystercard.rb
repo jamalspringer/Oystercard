@@ -9,10 +9,15 @@ class Oystercard
 
   def initialize(balance=CURRENT_BALANCE, max_balance=MAX_BALANCE)
     @balance = CURRENT_BALANCE
+    @max_balance = MAX_BALANCE
   end
 
   def top_up(amount)
-    @balance += amount
+    if @balance + amount < MAX_BALANCE
+      @balance += amount
+    else
+      raise "Max balance is #{MAX_BALANCE}"
+    end
   end
 
 end

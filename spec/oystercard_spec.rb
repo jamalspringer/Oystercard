@@ -9,4 +9,8 @@ describe Oystercard do
     subject.top_up(10)
     expect(subject.balance).to eq(10)
   end
+
+  it 'Checks that max balance is enforced' do
+    expect{subject.top_up(100)}.to raise_error
+  end
 end
