@@ -28,7 +28,11 @@ class Oystercard
   end
 
   def touch_in
-    @status = "In Journey"
+    if @balance > 1
+      @status = "In Journey"
+    else
+      raise "Min balance is £1"
+    end
   end
 
   def touch_out
@@ -41,7 +45,7 @@ class Oystercard
     else
       return false
     end
-    
+
   end
 
 end

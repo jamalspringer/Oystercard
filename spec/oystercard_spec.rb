@@ -21,13 +21,19 @@ describe Oystercard do
   end
 
   it 'Checks that the card can be used to Touch_in' do
+    subject.top_up(10)
     subject.touch_in
     expect(subject.status).to eq("In Journey")
   end
 
   it 'Checks that the card can be used to Touch_out' do
+    subject.top_up(10)
     subject.touch_out
     expect(subject.status).to eq("Not In Journey")
+  end
+
+  it 'Checks that the card cannot be used to touch in unless the minimum £1 balance has been met' do
+    expect{subject.touch_in}.to raise_error
   end
 
 end
