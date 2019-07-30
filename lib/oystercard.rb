@@ -4,17 +4,20 @@ class Oystercard
   CURRENT_BALANCE = 0
   MAX_BALANCE = 90
   STATUS = "New oyster"
-  ENTRY_STATION = ""
+  ENTRY_STATION = nil
+  EXIT_STATION = nil
 
   attr_reader :balance
   attr_reader :max_balance
   attr_reader :status
   attr_reader :entry_station
+  attr_reader :exit_station
 
   def initialize(balance=CURRENT_BALANCE, max_balance=MAX_BALANCE)
     @balance = CURRENT_BALANCE
     @max_balance = MAX_BALANCE
     @entry_station = nil
+    @exit_station = nil
   end
 
   def top_up(amount)
@@ -37,9 +40,10 @@ class Oystercard
     end
   end
 
-  def touch_out
+  def touch_out(exit_point)
     @balance -= 1
     @entry_station = nil
+    @exit_station = exit_point
   end
 
   def in_journey?
