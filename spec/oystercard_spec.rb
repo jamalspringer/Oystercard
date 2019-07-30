@@ -22,22 +22,37 @@ describe Oystercard do
 
   it 'Checks that the card can be used to Touch_in' do
     subject.top_up(10)
-    subject.touch_in
-    expect(subject.status).to eq("In Journey")
+    subject.touch_in("Leyton")
+    expect(subject.entry_station).to eq("Leyton")
   end
 
   it 'Checks that the card can be used to Touch_out' do
     subject.top_up(10)
     subject.touch_out
-    expect(subject.status).to eq("Not In Journey")
+    expect(subject.entry_station).to eq(nil)
   end
 
   it 'Checks that the card cannot be used to touch in unless the minimum £1 balance has been met' do
-    expect{subject.touch_in}.to raise_error
+    expect{subject.touch_in("Leyton")}.to raise_error
   end
 
   it 'Checks that the balance has the minimum fare deducted after a touch_out' do
     expect{subject.touch_out}.to change{subject.balance}.by(-1)
   end
+
+  it 'Checks that the entry station is accepted and stored during Touch_in' do
+    location = "Walthamstow Central"
+    subject.top_up(10)
+    subject.touch_in("Walthamstow Central")
+    expect(subject.entry_station).to eq("Walthamstow Central")
+  end
+
+  it 'Checks that the entry point has been forgotten once the touch_out method has been called' do
+    subject.top_up(10)
+    subject.touch_in("Walthamstow Central")
+    subject.touch_out
+    expect(subject.entry_station).to eq(nil)
+  end
+
 
 end

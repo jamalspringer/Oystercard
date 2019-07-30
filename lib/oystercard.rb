@@ -4,15 +4,17 @@ class Oystercard
   CURRENT_BALANCE = 0
   MAX_BALANCE = 90
   STATUS = "New oyster"
+  ENTRY_STATION = ""
 
   attr_reader :balance
   attr_reader :max_balance
   attr_reader :status
+  attr_reader :entry_station
 
   def initialize(balance=CURRENT_BALANCE, max_balance=MAX_BALANCE)
     @balance = CURRENT_BALANCE
     @max_balance = MAX_BALANCE
-    @status = STATUS
+    @entry_station = nil
   end
 
   def top_up(amount)
@@ -27,9 +29,9 @@ class Oystercard
     @balance -= fare
   end
 
-  def touch_in
+  def touch_in(entry_point)
     if @balance > 1
-      @status = "In Journey"
+      @entry_station = entry_point
     else
       raise "Min balance is £1"
     end
@@ -37,16 +39,15 @@ class Oystercard
 
   def touch_out
     @balance -= 1
-    @status = "Not In Journey"
+    @entry_station = nil
   end
 
   def in_journey?
-    if @status == "In Journey"
+    if @entry_station == !nil
       return true
     else
       return false
     end
-
   end
 
 end
