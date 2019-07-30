@@ -61,4 +61,14 @@ describe Oystercard do
     expect(subject.exit_station).to eq("Victoria")
   end
 
+  it 'Checks that the journey is recorded after an oystercard is used to touch_in and touch_out' do
+    subject.top_up(80)
+    subject.touch_in("Leyton")
+    subject.touch_out("Stratford")
+    subject.touch_in("Bow")
+    subject.touch_out("Mile end")
+    expect(subject.journeys[0]).to eq({"Leyton" => "Stratford"})
+    expect(subject.journeys[1]).to eq({"Bow" => "Mile end"})
+  end
+
 end
