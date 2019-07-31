@@ -54,9 +54,8 @@ end
   end
 
   it 'Checks that a fare amount can be deducted from the balance on the card' do
-    subject.top_up(10)
-    subject.deduct(5)
-    expect(subject.balance).to eq(5)
+    subject.top_up(Oystercard::FARE)
+    expect{subject.deduct}.to change{subject.balance}.by(-Oystercard::FARE)
   end
 
   it 'Checks that the card can be used to Touch_out' do
