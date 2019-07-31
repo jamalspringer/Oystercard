@@ -3,12 +3,12 @@ class Oystercard
 
   CURRENT_BALANCE = 0
   MAX_BALANCE = 90
+  MINIMUM_BALANCE = 1
   STATUS = "New oyster"
   ENTRY_STATION = nil
   EXIT_STATION = nil
   JOURNEYS = []
   JOURNEY_COUNT = 0
-
 
   attr_reader :balance
   attr_reader :max_balance
@@ -17,6 +17,7 @@ class Oystercard
   attr_reader :exit_station
   attr_reader :journeys
   attr_reader :journey_count
+  attr_reader :minimum_balance
 
   def initialize(balance=CURRENT_BALANCE, max_balance=MAX_BALANCE)
     @balance = CURRENT_BALANCE
@@ -24,8 +25,8 @@ class Oystercard
     @entry_station = ENTRY_STATION
     @exit_station = EXIT_STATION
     @journeys = JOURNEYS
-    @journey_count = 0
-
+    @journey_count = JOURNEY_COUNT
+    @minimum_balance = MINIMUM_BALANCE
   end
 
   def top_up(amount)
@@ -41,7 +42,7 @@ class Oystercard
   end
 
   def touch_in(entry_point)
-    if @balance > 1
+    if @balance >= @minimum_balance
       @entry_station = entry_point
       @journeys << {}
       @journeys[@journey_count] = {entry_point => nil}
