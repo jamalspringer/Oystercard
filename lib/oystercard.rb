@@ -1,6 +1,13 @@
 
 class Oystercard
 
+  array [
+  zone1 => 1
+  zome2 => 2
+  zone3 => 3
+  ]
+
+
   CURRENT_BALANCE = 0
   MAX_BALANCE = 90
   MINIMUM_BALANCE = 1
