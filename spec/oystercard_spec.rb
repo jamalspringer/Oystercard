@@ -43,7 +43,6 @@ describe Oystercard do
 
 end
 
-
   it 'Checks that balance is increased by the topup amount' do
     subject.top_up(10)
     expect(subject.balance).to eq(10)
@@ -68,11 +67,8 @@ end
     expect{subject.touch_in(entry_station)}.to raise_error
   end
 
-  it 'Checks that the balance has the minimum fare deducted after a touch_out' do
+  !it 'Checks that the balance has the minimum fare deducted after a touch_out' do
     expect{subject.touch_out(entry_station)}.to change{subject.balance}.by(-1)
   end
-
-
-
 
 end
