@@ -1,11 +1,7 @@
 
 class Oystercard
 
-  array [
-  zone1 => 1
-  zome2 => 2
-  zone3 => 3
-  ]
+
 
 
   CURRENT_BALANCE = 0
@@ -18,15 +14,7 @@ class Oystercard
   JOURNEY_COUNT = 0
   FARE = 1
 
-  attr_reader :balance
-  attr_reader :max_balance
-  attr_reader :status
-  attr_reader :entry_station
-  attr_reader :exit_station
-  attr_reader :journeys
-  attr_reader :journey_count
-  attr_reader :minimum_balance
-  attr_reader :fare
+  attr_reader :balance, :max_balance, :status, :entry_station, :exit_station, :journeys, :journey_count, :minimum_balance, :fare, :zone
 
   def initialize(balance=CURRENT_BALANCE, max_balance=MAX_BALANCE)
     @balance = CURRENT_BALANCE
@@ -50,9 +38,10 @@ class Oystercard
     @balance -= FARE
   end
 
-  def touch_in(entry_point)
+  def touch_in(entry_station , zone)
+    entry_station = Station.new(entry_station,zone)
     if @balance >= @minimum_balance
-      @entry_station = entry_point
+      entry_point = entry_station
       @journeys << {}
       @journeys[@journey_count] = {entry_point => nil}
     else
@@ -74,6 +63,12 @@ class Oystercard
     else
       return false
     end
+  end
+
+  private
+
+  def zone
+    Kernel.rand(1..6)
   end
 
 end

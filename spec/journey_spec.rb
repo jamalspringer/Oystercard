@@ -1,3 +1,4 @@
+
 require_relative '../lib/journey.rb'
 
 describe Journey do
@@ -13,8 +14,6 @@ describe Journey do
   it 'Checks that a journey can be stopped using the finish_journey method' do
     expect(subject).to respond_to(:finish_journey).with(1).argument
   end
-
-  it ''
 
 
 end
